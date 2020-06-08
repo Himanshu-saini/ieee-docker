@@ -1,0 +1,8 @@
+version: "3"
+services:
+    ieeewebserver:
+        container_name: ieeewebserver
+        image: himanshu17/ieeewebserver:latest
+        ports:
+            - "80:80"
+            - "443:443"
