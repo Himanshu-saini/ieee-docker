@@ -10,8 +10,11 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	git \
 	nginx
 
-COPY ./id_rsa ~/.ssh/
-COPY ./id_rsa.pub ~/.ssh/
+COPY ./id_rsa /home/ubuntu/.ssh/
+COPY ./id_rsa.pub /home/ubuntu/.ssh/
+
+RUN pwd
+RUN ls /home/ubuntu/
 
 RUN git clone $GIT_REPO_URL
 WORKDIR ./GIT_REPO_NAME
