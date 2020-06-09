@@ -14,7 +14,8 @@ COPY ./id_rsa /home/ubuntu/.ssh/
 COPY ./id_rsa.pub /home/ubuntu/.ssh/
 
 RUN pwd
-RUN ls /home/ubuntu/
+RUN ls -a /home/ubuntu/
+RUN ls -a /home/ubuntu/.ssh/
 
 RUN git clone $GIT_REPO_URL
 WORKDIR ./GIT_REPO_NAME
