@@ -2,6 +2,7 @@ FROM ubuntu
 
 ARG GIT_REPO_URL=git@github.com:Himanshu-saini/ieeewebsite.git
 ARG GIT_REPO_NAME=ieeewebsite
+ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     python3 \
