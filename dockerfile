@@ -13,15 +13,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 COPY ./id_rsa /root/.ssh/
 COPY ./id_rsa.pub /root/.ssh/
 
-RUN pwd
-RUN ls -a /root/.ssh/
-
-RUN touch /root/.ssh/known_hosts
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
-
 RUN git clone $GIT_REPO_URL
 WORKDIR ./GIT_REPO_NAME
 
+RUN ls -a
 RUN pip3 install -r requirements-Production.txt
 
 RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ && service nginx restart
