@@ -16,10 +16,11 @@ COPY ./id_rsa.pub /root/.ssh/
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
+RUN ls
 RUN git clone $GIT_REPO_URL
 RUN ls -a
 WORKDIR ./GIT_REPO_NAME
-
+RUN pwd
 RUN ls -a
 RUN pip3 install -r requirements-Production.txt
 
