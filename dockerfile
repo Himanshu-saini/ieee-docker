@@ -20,8 +20,10 @@ RUN git clone $GIT_REPO_URL
 WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
+RUN ls -a
 RUN python3 -m site
 RUN which python3
+RUN python3 -c 'import gunicorn; print(gunicorn.__path__)'
 RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ && service nginx restart
 RUN mv ./gunicorn\ settings/gunicorn_docker.service /etc/systemd/system/gunicorn.service && service gunicorn start
 
