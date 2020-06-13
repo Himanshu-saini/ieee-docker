@@ -20,9 +20,10 @@ RUN git clone $GIT_REPO_URL
 WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
-RUN pip3 freeze
+RUN python -m site
+RUN which python
 RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ && service nginx restart
-RUN mv ./gunicorn\ settings/gunicorn.service /etc/systemd/system/ && service gunicorn start
+RUN mv ./gunicorn\ settings/gunicorn_docker.service /etc/systemd/system/gunicorn.service && service gunicorn start
 
 EXPOSE 80
 EXPOSE 443
