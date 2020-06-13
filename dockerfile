@@ -28,4 +28,4 @@ RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/ieeewebsite/
 EXPOSE 80
 EXPOSE 443
 
-CMD ["bash"]
+CMD ["service","nginx","start"]
