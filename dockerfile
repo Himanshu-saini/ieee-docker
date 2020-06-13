@@ -12,10 +12,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 COPY ./id_rsa /root/.ssh/
 COPY ./id_rsa.pub /root/.ssh/
-
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
+WORKDIR /home/
 RUN git clone $GIT_REPO_URL
 WORKDIR ./$GIT_REPO_NAME
 
@@ -26,7 +26,7 @@ RUN mv ./nginx\ settings/ieeewebsite_docker /etc/nginx/sites-available/ieeewebsi
 	&& unlink /etc/nginx/sites-enabled/default \
 	&& ln -s /etc/nginx/sites-available/ieeewebsite /etc/nginx/sites-enabled
 RUN mv ./gunicorn\ settings/gunicorn_docker.service /etc/systemd/system/gunicorn.service 
-RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application --daemon
+RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application --daemon
 
 EXPOSE 80
 EXPOSE 443
