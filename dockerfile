@@ -17,6 +17,7 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN git clone $GIT_REPO_URL
+RUN ls -a
 WORKDIR ./GIT_REPO_NAME
 
 RUN ls -a
