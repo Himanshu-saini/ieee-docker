@@ -21,7 +21,7 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 RUN python3 -c 'import gunicorn; print(gunicorn.__path__)'
-RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ \
+RUN mv ./nginx\ settings/ieeewebsite_docker /etc/nginx/sites-available/ieeewebsite \
 	&& echo "daemon off;" >> /etc/nginx/nginx.conf \
 	&& unlink /etc/nginx/sites-enabled/default \
 	&& ln -s /etc/nginx/sites-available/ieeewebsite /etc/nginx/sites-enabled
