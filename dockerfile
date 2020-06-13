@@ -21,7 +21,7 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 RUN python3 -c 'import gunicorn; print(gunicorn.__path__)'
-RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ && service nginx restart
+RUN mv ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/ && echo "daemon off;" >> /etc/nginx/nginx.conf && service nginx restart
 RUN mv ./gunicorn\ settings/gunicorn_docker.service /etc/systemd/system/gunicorn.service 
 RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application --daemon
 
