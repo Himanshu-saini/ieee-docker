@@ -14,8 +14,8 @@ COPY ./id_rsa /root/.ssh/
 COPY ./id_rsa.pub /root/.ssh/
 
 RUN pwd
-RUN ls -a /home/ubuntu/
-RUN ls -a /home/ubuntu/.ssh/
+RUN ls -a /root/.ssh/
+
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
