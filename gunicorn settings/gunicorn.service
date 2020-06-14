@@ -6,7 +6,7 @@ After=network.target
 User=root
 Group=www-data
 WorkingDirectory=/home/ieeewebsite/
-ExecStart=/usr/local/lib/python3.8/site-packages/gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application
+ExecStart=/home/ubuntu/.local/lib/python3.8/site-packages/gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
