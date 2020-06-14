@@ -21,7 +21,7 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 
-RUN apt-get install -y upstart
+RUN apt-get install -y systemd-sysv
 COPY ["./gunicorn settings/gunicorn.service", "/etc/systemd/system/"]
 RUN chmod 755 /etc/systemd/system/gunicorn.service
 RUN service gunicorn start
