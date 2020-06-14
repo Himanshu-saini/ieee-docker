@@ -21,9 +21,10 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 
+RUN apt-get install -y upstart
 COPY ["./gunicorn settings/gunicorn.service", "/etc/systemd/system/"]
 RUN chmod 755 /etc/systemd/system/gunicorn.service
-RUN systemctl start gunicorn
+RUN service gunicorn start
 RUN service gunicorn enable 
 
 COPY ["./nginx settings/ieeewebsite", "/etc/nginx/sites-available/"]
