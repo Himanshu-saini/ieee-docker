@@ -31,4 +31,4 @@ RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ieeeweb
 EXPOSE 80
 EXPOSE 443
 
-CMD ["service","nginx","start"]
+CMD ["service","nginx","restart"]
