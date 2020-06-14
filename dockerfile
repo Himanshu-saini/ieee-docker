@@ -21,11 +21,9 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 
-RUN apt-get install -y systemd-sysv
-COPY ["./gunicorn settings/gunicorn.service", "/etc/systemd/system/"]
-RUN chmod 755 /etc/systemd/system/gunicorn.service
+COPY ["./gunicorn settings/gunicorn.service", "/lib/systemd/system/"]
+RUN chmod 755 /lib/systemd/system/gunicorn.service
 RUN service gunicorn start
-RUN service gunicorn enable 
 
 COPY ["./nginx settings/ieeewebsite", "/etc/nginx/sites-available/"]
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
