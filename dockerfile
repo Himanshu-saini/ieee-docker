@@ -23,8 +23,8 @@ RUN pip3 install -r requirements-Production.txt
 
 COPY ["./gunicorn settings/gunicorn.service", "/etc/systemd/system/"]
 RUN chmod 755 /etc/systemd/system/gunicorn.service
+RUN systemctl start gunicorn
 RUN service gunicorn enable 
-RUN service gunicorn start
 
 COPY ["./nginx settings/ieeewebsite", "/etc/nginx/sites-available/"]
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
