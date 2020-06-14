@@ -3,7 +3,7 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=root
+User=www-data
 Group=www-data
 WorkingDirectory=/home/ubuntu/ieeewebsite/
 ExecStart=/usr/local/lib/python3.8/dist-packages/gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ubuntu/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application
