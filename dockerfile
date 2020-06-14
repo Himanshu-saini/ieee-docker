@@ -19,14 +19,17 @@ WORKDIR /home/
 RUN git clone $GIT_REPO_URL
 WORKDIR ./$GIT_REPO_NAME
 
-RUN touch ieeewebsite.sock
 RUN pip3 install -r requirements-Production.txt
-RUN mv ./nginx\ settings/ieeewebsite_docker /etc/nginx/sites-available/ieeewebsite \
-	&& echo "daemon off;" >> /etc/nginx/nginx.conf \
+
+COPY ./gunicorn\ settings/gunicorn.service /etc/systemd/system/
+RUN chmod 755 /etc/systemd/system/gunicorn.service
+RUN service gunicorn enable 
+RUN service gunicorn start
+
+COPY ./nginx\ settings/ieeewebsite /etc/nginx/sites-available/
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
 	&& unlink /etc/nginx/sites-enabled/default \
 	&& ln -s /etc/nginx/sites-available/ieeewebsite /etc/nginx/sites-enabled
-RUN mv ./gunicorn\ settings/gunicorn_docker.service /etc/systemd/system/gunicorn.service 
-RUN gunicorn --access-logfile gunicorn.log --workers 3 --bind unix:/home/ieeewebsite/ieeewebsite.sock ieeewebsite.wsgi:application --daemon
 
 EXPOSE 80
 EXPOSE 443

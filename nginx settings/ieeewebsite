@@ -1,0 +1,29 @@
+upstream django {
+  server  unix:/home/ieeewebsite/ieeewebsite.sock;
+}
+
+server {
+  listen 80;
+  server_name www.ieeesbjiit.com;
+  rewrite ^/(.*) http://ieeesbjiit.com/$1 permanent;
+}
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    server_name 0.0.0.0;
+	access_log  /var/log/nginx/ieeewebsite.access.log;
+	error_log  /var/log/nginx/ieeewebsite.error.log;
+
+    location /static/ {
+            root /home/ieeewebsite/;
+    }
+    location /media/ {
+            root /home/ieeewebsite/;
+    }
+
+    location / {
+            include proxy_params;
+            proxy_pass http://django;
+    }
+}
