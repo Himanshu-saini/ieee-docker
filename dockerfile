@@ -21,12 +21,12 @@ WORKDIR ./$GIT_REPO_NAME
 
 RUN pip3 install -r requirements-Production.txt
 
-COPY "./gunicorn\ settings/gunicorn.service" /etc/systemd/system/
+COPY "./[gunicorn settings]/gunicorn.service" /etc/systemd/system/
 RUN chmod 755 /etc/systemd/system/gunicorn.service
 RUN service gunicorn enable 
 RUN service gunicorn start
 
-COPY "./nginx\ settings/ieeewebsite" /etc/nginx/sites-available/
+COPY "./[nginx settings]/ieeewebsite" /etc/nginx/sites-available/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
 	&& unlink /etc/nginx/sites-enabled/default \
 	&& ln -s /etc/nginx/sites-available/ieeewebsite /etc/nginx/sites-enabled
